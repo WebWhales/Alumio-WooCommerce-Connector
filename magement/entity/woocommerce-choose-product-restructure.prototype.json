@@ -1,0 +1,27 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-choose-product-restructure",
+  "name": "WooCommerce Choose Product Restructure",
+  "object": {
+    "class": "WebWhales\\AlumioWooCommerceConnector\\Transformer\\WooCommerceChooseProductRestructureTransformer",
+    "arguments": {
+      "parent_id": "%{parent_id}",
+      "product_id" : "%{product_id}"
+    }
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "parent_id": {
+        "type": "string",
+        "title": "Parent id"
+
+      },
+      "product_id": {
+        "type": "string",
+        "title": "Product id"
+      }
+    }
+  }
+}

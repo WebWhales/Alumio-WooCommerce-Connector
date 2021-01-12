@@ -1,0 +1,27 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "woocommerce-find-product-by-sku-transformer",
+  "name": "WooCommerce Find Product by SKU Transformer",
+  "object": {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "merger",
+          "parameters": {
+            "template": {
+              "WooCommerceProduct": "&{@}"
+            },
+            "transformer": {
+              "prototype": "woocommerce-find-product-by-sku",
+              "parameters": {
+                "sku": "&{sku}"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "woocommerce-choose-product-transformer",
+  "name": "Woocommerce Choose Product Transformer",
+  "object": {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "woocommerce-choose-product-restructure"
+        }
+      ]
+    }
+  }
+}

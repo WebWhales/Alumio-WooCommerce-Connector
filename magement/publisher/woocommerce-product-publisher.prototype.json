@@ -1,0 +1,36 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "publisher",
+  "identifier": "woocommerce-product-publisher",
+  "name": "WooCommerce Product Publisher",
+  "object": {
+    "prototype": "http-publisher",
+    "parameters": {
+      "request": {
+        "uri": "products",
+        "method": "post",
+        "payload": "&{@}"
+      },
+      "client": "woocommerce"
+    }
+  },
+  "schema": {
+    "ui": {
+      "ui:field": "callback",
+      "ui:options": {
+        "operationId": "redirectWooCommerceRestApiDocs",
+        "buttonText": "Example of the data structure",
+        "retriever": "NewWindow",
+        "toParameters": "@"
+      }
+    },
+    "properties": {
+      "client": {
+        "title": "Woocommerce HTTP Client",
+        "magement": {
+          "type": "http-client"
+        }
+      }
+    }
+  }
+}

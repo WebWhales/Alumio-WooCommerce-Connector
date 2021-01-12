@@ -1,0 +1,32 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-find-product-by-sku",
+  "name": "WooCommerce Find Product by SKU",
+  "object": {
+    "class": "Magement\\HttpConnector\\HttpTransformer",
+    "arguments": {
+      "client": {
+        "class": "Mediact\\DataContainer\\HttpClient\\EntityClient",
+        "arguments": {
+          "client": "woocommerce",
+          "uri": "/products?sku=%{sku}",
+          "method": "get",
+          "payload": "&{@}"
+        }
+      }
+    }
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "sku": {
+        "type": "string",
+        "title": "Sku",
+        "ui": {
+          "ui:help": "Supports &{} placeholders"
+        }
+      }
+    }
+  }
+}

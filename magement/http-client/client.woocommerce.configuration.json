@@ -1,0 +1,66 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "http-client",
+  "identifier": "woocommerce",
+  "name": "WooCommerce",
+  "object": {
+    "parameters": {
+      "ssl": {
+        "ssl_enable_npn": true,
+        "ssl_verifypeer": true,
+        "ssl_enable_alpn": true,
+        "ssl_verifystatus": false
+      },
+      "proxy": {
+        "proxytype": 0,
+        "httpproxytunnel": false
+      },
+      "plugins": [
+        {
+          "prototype": "base-uri",
+          "parameters": {
+            "uri": {
+              "parameters": "${WOOCOMMERCE_BASE_URI}${WOOCOMMERCE_URI}"
+            },
+            "options": []
+          }
+        },
+        {
+          "prototype": "header-set",
+          "parameters": {
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        },
+        {
+          "prototype": "logger",
+          "parameters": {
+            "formatter": "long"
+          }
+        }
+      ],
+      "httpauth": [],
+      "connection": {
+        "timeout": 0,
+        "forbid_reuse": false,
+        "tcp_fastopen": false,
+        "fresh_connect": false,
+        "connecttimeout": 0
+      },
+      "development": {
+        "verbose": false
+      },
+
+      "authentications": [
+        {
+          "prototype": "basic",
+          "parameters": {
+            "password": "${WOOCOMMERCE_PASSWORD}",
+            "username": "${WOOCOMMERCE_USERNAME}"
+          }
+        }
+      ]
+    }
+  }
+}

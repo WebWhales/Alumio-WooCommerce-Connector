@@ -1,0 +1,152 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-product-restructure",
+  "name": "WooCommerce Product Restructure",
+  "object": {
+    "class": "WebWhales\\AlumioWooCommerceConnector\\Transformer\\WooCommerceProductRestructureTransformer",
+    "arguments": {
+      "name": "%{name}",
+      "regular_price" : "%{regular_price}",
+      "description" : "%{description}",
+      "short_description" : "%{short_description}",
+      "type" : "%{type}",
+      "status" : "%{status}",
+      "featured" : "%{featured}",
+      "catalog_visibility" : "%{catalog_visibility}",
+      "sku" : "%{sku}",
+      "sale_price" : "%{sale_price}",
+      "virtual" : "%{virtual}",
+      "downloadable" : "%{downloadable}",
+      "download_limit" : "%{download_limit}",
+      "download_expiry" : "%{download_expiry}",
+      "external_url" : "%{external_url}",
+      "tax_status" : "%{tax_status}",
+      "manage_stock" : "%{manage_stock}",
+      "stock_quantity" : "%{stock_quantity}",
+      "stock_status" : "%{stock_status}",
+      "images" : "%{images}",
+      "backorders" : "%{backorders}",
+      "sold_individually" : "%{sold_individually}",
+      "weight" : "%{weight}",
+      "purchase_note" : "%{purchase_note}",
+      "default_attribute" : "%{default_attribute}"
+    }
+  },
+  "schema": {
+    "description": "Supports &{} placeholders",
+    "properties": {
+      "name": {
+        "type": "string",
+        "title": "Name"
+      },
+      "regular_price": {
+        "type": "string",
+        "title": "Product regular price."
+      },
+      "description": {
+        "type": "string",
+        "title": "Description"
+      },
+
+      "short_description": {
+        "type": "string",
+        "title": "Short Description"
+      },
+      "type": {
+        "type": "string",
+        "title": "Product type",
+        "description": " Options: simple, grouped, external and variable. Default is simple."
+      },
+      "status": {
+        "type": "string",
+        "title": "Product status (post status)",
+        "description": "Options: draft, pending, private and publish. Default is publish."
+      },
+      "featured": {
+        "type": "string",
+        "title": "Featured product",
+        "description": "Boolean"
+      },
+      "catalog_visibility": {
+        "type": "string",
+        "title": "Catalog visibility",
+        "description": "Options: visible, catalog, search and hidden. Default is visible."
+      },
+      "sku": {
+        "type": "string",
+        "title": "Unique identifier (sku)"
+      },
+      "sale_price": {
+        "type": "string",
+        "title": "Product sale price."
+      },
+      "virtual": {
+        "type": "string",
+        "title": "If the product is virtual",
+        "description": "Boolean"
+      },
+      "downloadable": {
+        "type": "string",
+        "title": "If the product is downloadable.",
+        "description": "Boolean"
+      },
+      "download_limit": {
+        "type": "string",
+        "title": "Download Limit",
+        "description": "Number of times downloadable files can be downloaded after purchase. Default is -1"
+      },
+      "download_expiry": {
+        "type": "string",
+        "title": "Download Expiry",
+        "description": "Number of days until access to downloadable files expires. Default is -1"
+      },
+      "external_url": {
+        "type": "string",
+        "title": "External Url"
+      },
+      "tax_status": {
+        "type": "string",
+        "title": "Tax status",
+        "description": "Options: taxable, shipping and none. Default is taxable."
+      },
+      "manage_stock": {
+        "type": "string",
+        "title": "Stock management at product level"
+      },
+      "stock_quantity": {
+        "type": "string",
+        "title": "Stock quantity"
+      },
+      "stock_status": {
+        "type": "string",
+        "title": "Controls the stock status of the product.",
+        "description": "Options: instock, outofstock, onbackorder. Default is instock."
+      },
+
+      "images": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "backorders": {
+        "type": "string",
+        "title": "Backorders",
+        "description": "Options: no, notify and yes. "
+      },
+      "sold_individually": {
+        "type": "string",
+        "title": "Allow one item to be bought in a single order"
+      },
+      "weight": {
+        "type": "string",
+        "title": "Product weight."
+      },
+      "purchase_note": {
+        "type": "string",
+        "title": "Note"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.schema.mediact.com/openapi/v3.json",
+  "paths": {
+    "/redirect-woocommerc-rest-api-docs": {
+      "get": {
+        "description": "Redirect to WooCommerce Rest Api Docs",
+        "operationId": "redirectWooCommerceRestApiDocs",
+        "tags": [
+          "Oauth"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "2XX": { "description": "OK" },
+          "3XX": { "description": "Redirect" },
+          "4XX": { "description": "Client Error" },
+          "5XX": { "description": "Server Error" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "subscriber",
+  "identifier": "woocommerce-order-subscriber",
+  "name": "WooCommerce Order Subscriber",
+  "object": {
+    "class": "WebWhales\\AlumioWooCommerceConnector\\Subscriber\\OrderSubscriber"
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "firstname": {
+        "type": "string"
+      },
+      "lastname": {
+        "type": "string"
+      },
+      "address": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "firstname",
+      "lastname",
+      "address"
+    ]
+  }
+}

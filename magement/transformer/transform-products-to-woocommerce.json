@@ -1,0 +1,16 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "transform-products-to-woocommerce",
+  "name": "Move Product To Woocommerce ",
+  "object": {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "woocommerce-product-restructure"
+        }
+      ]
+    }
+  }
+}

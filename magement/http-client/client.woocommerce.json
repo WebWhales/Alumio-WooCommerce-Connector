@@ -1,0 +1,5 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.default.json",
+  "type": "http-client",
+  "object": "woocommerce"
+}

@@ -1,0 +1,311 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.default.prototype.json",
+  "type": "http-client",
+  "object": {
+    "class": "Http\\Client\\Common\\PluginClient",
+    "arguments": {
+      "plugins": "%{plugins}",
+      "client": {
+        "class": "Http\\Client\\Common\\PluginClient",
+        "arguments": {
+          "client": {
+            "class": "Http\\Client\\Curl\\Client",
+            "arguments": {
+              "options": {
+                "78": "%{connection.connecttimeout}",
+                "13": "%{connection.timeout}",
+                "19": "%{connection.low_speed_limit}",
+                "20": "%{connection.low_speed_time}",
+                "75": "%{connection.forbid_reuse}",
+                "74": "%{connection.fresh_connect}",
+                "244": "%{connection.tcp_fastopen}",
+                "64": "%{ssl.ssl_verifypeer}",
+                "232": "%{ssl.ssl_verifystatus}",
+                "226": "%{ssl.ssl_enable_alpn}",
+                "225": "%{ssl.ssl_enable_npn}",
+                "233": "%{ssl.ssl_falsestart}",
+                "216": "%{ssl.ssl_options}",
+                "10004": "%{proxy.proxy}",
+                "101": "%{proxy.proxytype}",
+                "61": "%{proxy.httpproxytunnel}",
+                "111": "%{proxy.proxyauth}",
+                "10006": "%{proxy.proxyuserpwd}",
+                "41": "%{development.verbose}",
+                "10243": "%{development.connect_to}",
+                "10203": "%{development.resolve}",
+                "107": "%{httpauth.auth}",
+                "10005": "%{httpauth.authuserpwd}"
+              }
+            }
+          },
+          "plugins": [
+            {
+              "class": "Http\\Client\\Common\\Plugin\\AuthenticationPlugin",
+              "arguments": {
+                "authentication": {
+                  "class": "Http\\Message\\Authentication\\Chain",
+                  "arguments": {
+                    "authenticationChain": "%{authentications}"
+                  },
+                  "meta": {
+                    "authenticationChain": {
+                      "type": "Http\\Message\\Authentication[]"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "class": "Http\\Client\\Common\\Plugin\\ErrorPlugin"
+            }
+          ]
+        },
+        "meta": {
+          "client": {
+            "type": "Psr\\Http\\Client\\ClientInterface"
+          },
+          "plugins": {
+            "type": "Http\\Client\\Common\\Plugin[]"
+          }
+        }
+      }
+    },
+    "meta": {
+      "client": {
+        "type": "Psr\\Http\\Client\\ClientInterface"
+      },
+      "plugins": {
+        "type": "Http\\Client\\Common\\Plugin[]"
+      }
+    }
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "plugins": {
+        "title": "Plugins to use",
+        "type": "array",
+        "ui": {
+          "ui:addRowTitle": "Add a plugin"
+        },
+        "items": {
+          "ui": {
+            "di:type": "http-client-plugin",
+            "ui:placeholder": "Configure a plugin"
+          }
+        }
+      },
+      "authentications": {
+        "title": "Authentications to use",
+        "type": "array",
+        "ui": {
+          "ui:addRowTitle": "Add an authentication"
+        },
+        "items": {
+          "ui": {
+            "di:type": "http-authentication",
+            "ui:placeholder": "Configure an authentication"
+          }
+        }
+      },
+      "connection": {
+        "type": "object",
+        "title": "Connection",
+        "properties": {
+          "connecttimeout": {
+            "type": "integer",
+            "title": "The number of seconds to wait while trying to connect",
+            "default": 0
+          },
+          "timeout": {
+            "type": "integer",
+            "title": "The number of seconds to wait",
+            "default": 0
+          },
+          "low_speed_limit": {
+            "type": "integer",
+            "title": "The minimum transfer speed, in bytes per second"
+          },
+          "low_speed_time": {
+            "type": "integer",
+            "title": "The number of seconds to wait before aborting when transfer speed is too low"
+          },
+          "forbid_reuse": {
+            "type": "boolean",
+            "title": "Close connection after a request",
+            "default": false
+          },
+          "fresh_connect": {
+            "type": "boolean",
+            "title": "Use a fresh connection instead of using a cached one",
+            "default": false
+          },
+          "tcp_fastopen": {
+            "type": "boolean",
+            "title": "Enable TCP Fast Open",
+            "default": false
+          }
+        }
+      },
+      "ssl": {
+        "type": "object",
+        "title": "SSL",
+        "properties": {
+          "ssl_verifypeer": {
+            "type": "boolean",
+            "title": "Verify SSL peer certificate",
+            "default": true
+          },
+          "ssl_verifystatus": {
+            "type": "boolean",
+            "title": "Verify SSL certificate status",
+            "default": true
+          },
+          "ssl_enable_alpn": {
+            "type": "boolean",
+            "title": "Enable ALPN in the SSL handshake",
+            "default": true
+          },
+          "ssl_enable_npn": {
+            "type": "boolean",
+            "title": "Enable NPN in the SSL handshake",
+            "default": true
+          },
+          "ssl_options": {
+            "type": "integer",
+            "title": "SSL options",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "enumNames": [
+              "Allow beast",
+              "No revoke",
+              "Allow beast and no revoke"
+            ]
+          }
+        }
+      },
+      "httpauth": {
+        "type": "object",
+        "title": "HTTP Authentication",
+        "properties": {
+          "auth": {
+            "type": "integer",
+            "title": "Authentication Method",
+            "enum": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "enumNames": [
+              "Basic",
+              "Didest",
+              "GSS Negotiate",
+              "NTLM"
+            ]
+          },
+          "authuserpwd": {
+            "type": "string",
+            "title": "Authentication username and password",
+            "ui": {
+              "ui:help": "Use USERNAME:PASSWORD"
+            }
+          }
+        }
+      },
+      "proxy": {
+        "type": "object",
+        "title": "Proxy",
+        "properties": {
+          "proxy": {
+            "type": "string",
+            "title": "HTTP proxy to tunnel requests through"
+          },
+          "proxytype": {
+            "type": "integer",
+            "title": "Proxy type",
+            "enum": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "enumNames": [
+              "HTTP",
+              "Socks4",
+              "Socks5",
+              "Socks4A",
+              "Socks5Hostname"
+            ],
+            "default": 0
+          },
+          "httpproxytunnel": {
+            "type": "boolean",
+            "title": "Tunnel through HTTP proxy",
+            "default": false
+          },
+          "proxyauth": {
+            "type": "integer",
+            "title": "Proxy authentication",
+            "enum": [
+              1,
+              8
+            ],
+            "enumNames": [
+              "Basic",
+              "NTLM"
+            ]
+          },
+          "proxyuserpwd": {
+            "type": "string",
+            "title": "Proxy username and password",
+            "ui": {
+              "ui:help": "Use USERNAME:PASSWORD"
+            }
+          }
+        }
+      },
+      "development": {
+        "type": "object",
+        "title": "Development",
+        "properties": {
+          "verbose": {
+            "type": "boolean",
+            "title": "Verbose output",
+            "default": false
+          },
+          "connect_to": {
+            "type": "array",
+            "title": "Connect to a specific host and port instead of the URL",
+            "ui": {
+              "ui:addRowTitle": "Add host mapping"
+            },
+            "items": {
+              "type": "string",
+              "ui": {
+                "ui:help": "Use HOST:PORT:CONNECT-TO-HOST:CONNECT-TO-PORT"
+              }
+            }
+          },
+          "resolve": {
+            "type": "array",
+            "title": "Connect to a specific IP",
+            "items": {
+              "type": "string",
+              "ui": {
+                "ui:help": "Use HOST:PORT:CONNECT-TO-IP"
+              }
+            },
+            "ui": {
+              "ui:addRowTitle": "Add host to IP mapping"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "webwhales/alumio-woocommerce-connector",
+    "description": "WooCommerce connector for Alumio",
+    "homepage": "https://github.com/WebWhales/Alumio-WooCommerce-Connector",
+    "type": "library",
+    "license": "proprietary",
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.3",
+        "ext-json": "*",
+        "magement/publisher-api": "^1.0",
+        "magement/subscriber-api": "^1.0"
+    },
+    "require-dev": {
+        "magement/sdk": "@stable"
+    },
+    "autoload": {
+        "psr-4": {
+            "WebWhales\\AlumioWooCommerceConnector\\": "./src"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/WebWhales/Alumio-WooCommerce-Connector/issues"
+    }
+}

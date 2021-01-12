@@ -1,0 +1,16 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "outgoing-configuration",
+  "identifier": "woocommerce-product",
+  "name": "WooCommerce - Product",
+  "object": {
+    "parameters": {
+      "publisher": {
+        "prototype": "woocommerce-product-publisher",
+        "parameters": {
+          "client": "woocommerce"
+        }
+      }
+    }
+  }
+}
