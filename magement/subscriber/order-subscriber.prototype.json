@@ -3,29 +3,70 @@
   "type": "subscriber",
   "identifier": "woocommerce-order-subscriber",
   "name": "WooCommerce Order Subscriber",
+  "description": "Subscriber for WooCommerce order",
   "object": {
-    "class": "WebWhales\\AlumioWooCommerceConnector\\Subscriber\\OrderSubscriber"
+    "class": "Magement\\HttpConnector\\HttpSubscriber",
+    "arguments": {
+      "client": {
+        "class": "WebWhales\\AlumioWooCommerceConnector\\HttpClient\\EntityOrderClient",
+        "arguments": {
+          "client": "%{client}",
+          "days": "%{days}",
+          "limit": "%{limit}",
+          "payload": {
+            "status": "%{status}"
+          }
+        }
+      },
+      "transformer": "%{transformer}"
+    }
   },
   "schema": {
-    "type": "object",
     "properties": {
-      "firstname": {
-        "type": "string"
-      },
-      "lastname": {
-        "type": "string"
-      },
-      "address": {
-        "type": "array",
-        "items": {
-          "type": "string"
+      "client": {
+        "title": "WooCommerce HTTP Client",
+        "default": "woocommerce",
+        "magement": {
+          "type": "http-client"
         }
+      },
+      "status": {
+        "type": "string",
+        "title": "status",
+        "enum": [
+          "any",
+          "pending",
+          "processing",
+          "on-hold",
+          "completed",
+          "cancelled",
+          "refunded",
+          "failed",
+          "trash"
+        ],
+        "enumNames": [
+          "Any",
+          "Pending",
+          "Processing",
+          "On hold",
+          "Completed",
+          "Cancelled",
+          "Refunded",
+          "Failed",
+          "Trash"
+        ],
+        "default": "any"
+      },
+
+      "days": {
+        "type": "integer",
+        "title": "Days",
+        "default": 30
+      },
+      "limit": {
+        "type": "integer",
+        "title": "Data Limit"
       }
-    },
-    "required": [
-      "firstname",
-      "lastname",
-      "address"
-    ]
+    }
   }
 }
