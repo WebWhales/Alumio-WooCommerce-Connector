@@ -1,0 +1,20 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "woocommerce-storage-a-customerid-and-timestamp",
+  "name": "WooCommerce  Storage a CustomerID and Timestamp",
+  "object":
+  {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "woocommerce-storage-customerid"
+        },
+        {
+          "prototype": "woocommerce-storage-timestamp"
+        }
+      ]
+    }
+  }
+}

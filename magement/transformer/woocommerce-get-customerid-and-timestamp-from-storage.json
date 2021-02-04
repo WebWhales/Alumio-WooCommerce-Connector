@@ -1,0 +1,21 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "woocommerce-get-customerid-and-timestamp-from-storage",
+  "name": "WooCommerce  -  Get CustomerID And Timestamp From Storage",
+  "object":
+  {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "storage-get-all",
+          "parameters": {
+            "storage": "woocommerce-customerid-and-timestamp",
+            "destinationPath": "storage"
+          }
+        }
+      ]
+    }
+  }
+}

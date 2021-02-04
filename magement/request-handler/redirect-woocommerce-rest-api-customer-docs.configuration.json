@@ -1,12 +1,12 @@
 {
   "$schema": "https://di.schema.mediact.com/register.configuration.json",
   "type": "request-handler",
-  "identifier": "redirectWooCommerceRestApiDocs",
-  "name": "Redirect to WooCommerce Rest Api Docs",
+  "identifier": "redirectWooCommerceRestApiCustomerDocs",
+  "name": "Redirect  to WooCommerce Rest Api For Customer Docs",
   "object": {
     "class": "WebWhales\\AlumioWooCommerceConnector\\RequestHandler\\RedirectWooCommerceRestApiDocs",
     "arguments": {
-      "serverParam" : "products"
+      "serverParam" : "customers"
     }
   }
 }

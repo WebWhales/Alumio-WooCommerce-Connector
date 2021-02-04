@@ -29,6 +29,7 @@ class RedirectWooCommerceRestApiDocs implements RequestHandlerInterface
 
     private static $docsUrls = [
         'products' => 'https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-product',
+        'customers' => 'https://woocommerce.github.io/woocommerce-rest-api-docs/#customer-properties',
     ];
 
     /**

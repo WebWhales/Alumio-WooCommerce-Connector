@@ -11,7 +11,7 @@
         "method": "post",
         "payload": "&{@}"
       },
-      "client": "woocommerce"
+      "client": "%{client}"
     }
   },
   "schema": {

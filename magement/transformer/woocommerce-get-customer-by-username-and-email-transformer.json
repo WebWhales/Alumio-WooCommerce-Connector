@@ -1,0 +1,68 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "woocommerce-get-customer-by-username-and-email-transformer",
+  "name": "Woocommerce Get Customer By Username And Email Transformer",
+  "object":
+  {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "merger",
+          "parameters": {
+            "template": {
+              "WordpressUser": "&{@}"
+            },
+            "transformer": {
+              "prototype": "woocommerce-customer-by-username",
+              "parameters": {
+                "username": "&{customerid}"
+              }
+            }
+          }
+        },
+        {
+          "prototype": "conditional",
+          "parameters": {
+            "filters": [
+              {
+                "prototype": "value-condition",
+                "parameters": {
+                  "accessor": {
+                    "prototype": "pattern",
+                    "parameters": {
+                      "pattern": "WordpressUser"
+                    }
+                  },
+                  "conditions": [
+                    {
+                      "prototype": "empty"
+                    }
+                  ]
+                }
+              }
+            ],
+            "transformers": [
+              {
+                "prototype": "merger",
+                "parameters": {
+                  "template": {
+                    "WordpressUser": "&{@}"
+                  },
+                  "transformer": {
+                    "prototype": "woocommerce-customer-by-email",
+                    "parameters":
+                    {
+                      "email": "&{email}"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

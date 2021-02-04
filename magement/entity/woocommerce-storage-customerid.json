@@ -1,0 +1,30 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-store-customerid",
+  "name": "WooCommerce - Store CustomerID",
+  "object": {
+    "class": "Magement\\StorageConnector\\DataTransformer\\StorageWriteTransformer",
+    "arguments": {
+      "accessor": {
+        "prototype": "pattern",
+        "parameters": {
+          "pattern": "customerid"
+        }
+      },
+      "storage": "woocommerce-customerid-and-timestamp",
+      "sourcePath": "%{customerid}",
+      "storagePath": "CustomerID"
+
+    }
+  },
+  "schema":{
+    "type": "object",
+    "properties": {
+      "customerid": {
+        "type": "string",
+        "title": "CustomerID"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "compare-timestamps-for-customer",
+  "name": "Compare  timestamps  for Customer Woocommerce ",
+
+  "object": {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "conditional",
+          "parameters": {
+            "filters": [
+              {
+                "prototype": "compare-two-values"
+              }
+            ],
+            "transformers": [
+              {
+                "prototype": "woocommerce-customer-restructure"
+              }
+
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

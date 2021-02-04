@@ -1,0 +1,156 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-customer-restructure",
+  "name": "WooCommerce Customer Restructure",
+  "object": {
+    "class": "WebWhales\\AlumioWooCommerceConnector\\Transformer\\WooCommerceCustomerRestructureTransformer",
+    "arguments": {
+      "email": "%{email}",
+      "first_name": "%{first_name}",
+      "last_name": "%{last_name}",
+      "username": "%{username}",
+      "password": "%{password}",
+      "billing": "%{billing}",
+      "shipping": "%{shipping}",
+      "meta_data": "%{meta_data}"
+    }
+  },
+  "schema": {
+    "description": "Supports &{} placeholders",
+    "properties": {
+      "email": {
+        "type": "string",
+        "title": "email address"
+      },
+      "first_name": {
+        "type": "string",
+        "title": "Customer first name"
+      },
+      "last_name": {
+        "type": "string",
+        "title": "Customer last name"
+      },
+      "username": {
+        "type": "string",
+        "title": "Customer login name"
+      },
+      "password": {
+        "type": "string",
+        "title": "Customer password"
+      },
+      "billing": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string",
+              "title": "First name"
+            },
+            "last_name": {
+              "type": "string",
+              "title": "Last name"
+            },
+            "company": {
+              "type": "string",
+              "title": "Company name"
+            },
+            "address_1": {
+              "type": "string",
+              "title": "Address line 1"
+            },
+            "address_2": {
+              "type": "string",
+              "title": "Address line 2"
+            },
+            "city": {
+              "type": "string",
+              "title": "City name"
+            },
+            "state": {
+              "type": "string",
+              "title": "SO code or name of the state, province or district."
+            },
+            "postcode": {
+              "type": "string",
+              "title": "Postal code"
+            },
+            "country": {
+              "type": "string",
+              "title": "country"
+            },
+            "email": {
+              "type": "string",
+              "title": "Email address"
+            },
+            "phone": {
+              "type": "string",
+              "title": "Phone number"
+            }
+          }
+        }
+      },
+      "shipping": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string",
+              "title": "First name"
+            },
+            "last_name": {
+              "type": "string",
+              "title": "Last name"
+            },
+            "company": {
+              "type": "string",
+              "title": "Company name"
+            },
+            "address_1": {
+              "type": "string",
+              "title": "Address line 1"
+            },
+            "address_2": {
+              "type": "string",
+              "title": "Address line 2"
+            },
+            "city": {
+              "type": "string",
+              "title": "City name"
+            },
+            "state": {
+              "type": "string",
+              "title": "SO code or name of the state, province or district."
+            },
+            "postcode": {
+              "type": "string",
+              "title": "Postal code"
+            },
+            "country": {
+              "type": "string",
+              "title": "country"
+            }
+          }
+        }
+      },
+      "meta_data": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "title": "Meta key"
+            },
+            "value": {
+              "type": "string",
+              "title": "Meta value"
+            }
+          }
+        }
+      }
+    }
+  }
+}

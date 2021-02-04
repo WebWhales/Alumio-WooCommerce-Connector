@@ -1,0 +1,32 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "storage-get-all",
+  "name": "Get All from storage",
+  "object": {
+    "class": "WebWhales\\AlumioWooCommerceConnector\\DataTransformer\\StorageGetAllTransformer",
+
+    "arguments": {
+      "storage": "%{storage}",
+      "destinationPath": "%{destinationPath}"
+    }
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "storage": {
+        "title": "Storage",
+        "magement": {
+          "type": "storage"
+        }
+      },
+      "destinationPath": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "storage",
+      "destinationPath"
+    ]
+  }
+}

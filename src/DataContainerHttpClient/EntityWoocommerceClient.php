@@ -65,8 +65,11 @@ class EntityWoocommerceClient implements EntityClientInterface
     ) {
 
         $this->extra_object_id = $extra_object_id;
+        $this->uri                  = "/{$object_name}";
 
-        $this->uri                  = "/{$object_name}/{$object_id}";
+        if($object_id){
+            $this->uri                  .= "/{$object_id}";
+        }
         $this->extra_object_name = $extra_object_name;
 
         $this->client  = $client;

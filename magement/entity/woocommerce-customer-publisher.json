@@ -1,0 +1,49 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-customer-publisher",
+  "name": "WooCommerce Customer Publisher",
+  "object": {
+    "class": "Magement\\HttpConnector\\HttpTransformer",
+    "arguments": {
+      "client": {
+        "class": "WebWhales\\AlumioWooCommerceConnector\\DataContainerHttpClient\\EntityWoocommerceClient",
+        "arguments": {
+          "client": "%{client}",
+          "object_name": "customers",
+          "object_id": "%{customer_id}",
+          "payload": "&{@}"
+        },
+        "meta": {
+          "payload": {
+            "default": "&{@}"
+          }
+        }
+      }
+    }
+  },
+  "schema": {
+    "ui": {
+      "ui:field": "callback",
+      "ui:options": {
+        "operationId": "redirectWooCommerceRestApiCustomerDocs",
+        "buttonText": "Example of the data structure",
+        "retriever": "NewWindow",
+        "toParameters": "@"
+      }
+    },
+    "properties": {
+
+      "customer_id": {
+        "type": "string",
+        "title": "Wordpress user id"
+      },
+      "client": {
+        "title": "Woocommerce HTTP Client",
+        "magement": {
+          "type": "http-client"
+        }
+      }
+    }
+  }
+}

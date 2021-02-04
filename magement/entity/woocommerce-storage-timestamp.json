@@ -1,0 +1,31 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-store-timestamp",
+  "name": "WooCommerce - Store Timestamp",
+  "object": {
+    "class": "Magement\\StorageConnector\\DataTransformer\\StorageWriteTransformer",
+    "arguments": {
+      "accessor": {
+        "prototype": "pattern",
+        "parameters": {
+          "pattern": "customerid"
+        }
+      },
+      "storage": "woocommerce-customerid-and-timestamp",
+      "storagePath": "Timestamp",
+      "sourcePath": "%{timestamp}"
+    }
+  },
+  "schema":{
+    "type": "object",
+    "properties": {
+      "timestamp": {
+        "type": "string",
+        "title": "Timestamp"
+      }
+    }
+  }
+}
+
+

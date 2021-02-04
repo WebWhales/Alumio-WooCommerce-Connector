@@ -1,0 +1,38 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "filter",
+  "identifier": "compare-two-values",
+  "name": "Compare two values",
+  "object": {
+    "class": "WebWhales\\AlumioWooCommerceConnector\\Filter\\CompareTwoValuesFilter",
+    "arguments": {
+      "value1": "%{value_1}",
+      "value2": "%{value_2}",
+      "operation": "%{operation}"
+    }
+  },
+  "schema": {
+    "properties": {
+      "value_1": {
+        "type": "string",
+        "title": "Value 1"
+
+      },
+      "value_2": {
+        "type": "string",
+        "title": "Value 2"
+
+      },
+
+      "operation": {
+        "type": "string",
+        "enum": [
+          "equal",
+          "not_equal",
+          "greater",
+          "less"
+        ]
+      }
+    }
+  }
+}

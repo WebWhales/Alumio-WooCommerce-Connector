@@ -1,0 +1,28 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "list-transformer",
+  "identifier": "woocommerce-customer-publisher-transformer",
+  "name": "Woocommerce  Customer Publisher Transformer",
+  "object":
+  {
+    "prototype": "data",
+    "parameters": {
+      "transformers": [
+        {
+          "prototype": "woocommerce-customer-publisher"
+        },
+        {
+          "prototype": "http-transformer",
+          "parameters": {
+            "client": "woocommerce",
+            "request": {
+              "uri": "/customer",
+              "method": "post",
+              "payload": "&{@}"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

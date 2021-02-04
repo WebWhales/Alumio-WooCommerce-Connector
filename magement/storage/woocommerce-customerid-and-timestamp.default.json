@@ -1,0 +1,18 @@
+{
+  "$schema": "https://di.schema.mediact.com/register.configuration.json",
+  "type": "storage",
+  "identifier": "woocommerce-customerid-and-timestamp",
+  "name": "WooCommerce  - CustomerID and Timestamp",
+  "description": "Storage CustomerID and Timestamp - WooCommerce Customer Date",
+  "object": {
+    "prototype": "file",
+    "parameters":
+    {
+      "ttl": {
+        "parameters": "30 days"
+      },
+      "path": "woocommerce-customerid-timestamp",
+      "filesystem": "default-storage-filesystem"
+    }
+  }
+}
