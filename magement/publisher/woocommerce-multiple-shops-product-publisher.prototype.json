@@ -1,8 +1,8 @@
 {
   "$schema": "https://di.schema.mediact.com/register.prototype.json",
   "type": "publisher",
-  "identifier": "woocommerce-http-product-publisher",
-  "name": "WooCommerce HTTP Product Publisher",
+  "identifier": "woocommerce-multiple-shops-product-publisher.prototype",
+  "name": "WooCommerce Multiple Shops Product Publisher",
   "object": {
     "class": "Magement\\HttpConnector\\HttpPublisher",
     "arguments": {
@@ -14,7 +14,9 @@
           "object_id": "%{product_id}",
           "extra_object_name": "variations",
           "extra_object_id": "%{variation_id}",
-          "payload": "%{payload}"
+          "url": "%{url}",
+          "payload": "%{payload}",
+          "header": "%{header}"
         },
         "meta": {
           "payload": {
@@ -27,6 +29,13 @@
   "schema": {
     "type": "object",
     "properties": {
+      "url": {
+        "type": "string",
+        "title": "Url",
+        "ui": {
+          "ui:help": "Supports &{} placeholders"
+        }
+      },
       "product_id": {
         "type": "string",
         "title": "Product id",
@@ -41,7 +50,26 @@
           "ui:help": "Supports &{} placeholders"
         }
       },
-
+      "header": {
+        "type": "array",
+        "title": "Header",
+        "ui": {
+          "ui:help": "Supports &{} placeholders"
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "title": "key"
+            },
+            "value": {
+              "type": "string",
+              "title": "value"
+            }
+          }
+        }
+      },
       "payload": {
         "type": ["string", "object"],
         "title": "Request Parameters",

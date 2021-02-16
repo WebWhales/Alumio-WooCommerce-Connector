@@ -30,7 +30,9 @@
           "equal",
           "not_equal",
           "greater",
-          "less"
+          "less",
+          "in_array",
+          "not_in_array"
         ]
       }
     }

@@ -40,6 +40,9 @@ class EntityWoocommerceClient implements EntityClientInterface
 
     private $extra_object_name;
 
+    private $header;
+
+
     /**
      * Constructor.
      *
@@ -48,7 +51,9 @@ class EntityWoocommerceClient implements EntityClientInterface
      * @param string|null                    $object_id
      * @param string|null                    $extra_object_id
      * @param string|null                    $object_name
+     * @param string|null                    $url
      * @param string|null                    $extra_object_name
+     * @param array                    $header
      * @param VariableExpanderInterface|null $expander
      * @param UriFactoryInterface|null       $uriFactory
      */
@@ -60,12 +65,18 @@ class EntityWoocommerceClient implements EntityClientInterface
         $extra_object_id = null,
         $object_name = null,
         $extra_object_name = null,
+        $url = null,
+        $header= [],
         VariableExpanderInterface $expander = null,
         UriFactoryInterface $uriFactory = null
     ) {
 
         $this->extra_object_id = $extra_object_id;
-        $this->uri                  = "/{$object_name}";
+        $this->uri="";
+        if($url){
+            $this->uri                  .= "{$url}";
+        }
+        $this->uri                  .= "/{$object_name}";
 
         if($object_id){
             $this->uri                  .= "/{$object_id}";
@@ -79,6 +90,8 @@ class EntityWoocommerceClient implements EntityClientInterface
             new StringExpander(null, new PlaceHolderFinder('&{'), 1)
         );
         $this->uriFactory = $uriFactory ?? new Psr17Factory();
+
+        $this->header = $header;
     }
 
     /**
@@ -90,7 +103,6 @@ class EntityWoocommerceClient implements EntityClientInterface
      */
     public function __invoke(DataContainerInterface $entity): ResponseInterface
     {
-
         $data = $entity->all();
 
         $this->uri          = (string) $this->expander->__invoke($this->uri, $data);
@@ -103,10 +115,14 @@ class EntityWoocommerceClient implements EntityClientInterface
         }
 
         $payload = (array) $this->expander->__invoke($this->payload, $data);
-
+        $header=[];
+        foreach ($this->header as$value){
+            $header[$value["key"]] = (string) $this->expander->__invoke($value["value"], $data);
+        }
         return $this->client->put(
             $this->uri,
-            new DataContainer($payload)
+            new DataContainer($payload),
+            $header
         );
     }
 }

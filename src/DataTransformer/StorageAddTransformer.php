@@ -56,11 +56,11 @@ class StorageAddTransformer implements TransformerInterface
             $key,
             $container->get($this->sourcePath)
         );
-        $container->set('test',array_keys($storageContainer->all()));
-        $this->storage->set('value', $storageContainer->all());
-
-
-        return $container;
+        //$container->set('test',array_keys($storageContainer->all()));
+        //$this->storage->set('value', $storageContainer->all());
+        //
+        //
+        //return $container;
         $storageContainer->set(
             $this->storagePath,
             $container->get($this->sourcePath)

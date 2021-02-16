@@ -59,6 +59,13 @@ class CompareTwoValuesFilter implements FilterInterface
             case 'equal':
                 return $container->get($this->value1) === $container->get($this->value2);
                 break;
+            case 'in_array':
+                return in_array($container->get($this->value2) ,$container->get($this->value1) )   ;
+                break;
+            case 'not_in_array':
+                return ! in_array($container->get($this->value2) ,$container->get($this->value1) )   ;
+                break;
+
             case 'not_equal':
                 return $container->get($this->value1) !== $container->get($this->value2);
                 break;

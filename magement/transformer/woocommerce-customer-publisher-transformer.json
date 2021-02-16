@@ -9,16 +9,13 @@
     "parameters": {
       "transformers": [
         {
-          "prototype": "woocommerce-customer-publisher"
-        },
-        {
           "prototype": "http-transformer",
           "parameters": {
             "client": "woocommerce",
             "request": {
-              "uri": "/customer",
+              "uri": "/customers",
               "method": "post",
-              "payload": "&{@}"
+              "payload": "&{wooCommerceCustomer}"
             }
           }
         }

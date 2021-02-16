@@ -66,8 +66,8 @@ class WooCommerceCustomerRestructureTransformer implements TransformerInterface
 
     public function __invoke(DataContainerInterface $container): DataContainerInterface
     {
-        $value = $this->expander->__invoke($this->shipping, $container->all());
-        $container->set('wooCommerceCustomer.shipping33',$this->shipping);
+      //  $value = $this->expander->__invoke($this->shipping, $container->all());
+      //  $container->set('wooCommerceCustomer.shipping33',$this->shipping);
     //    foreach ($this->shipping[0] as $key => $value){
     //        $container->set('wooCommerceCustomer.shipping',$this->expander->__invoke($value, $container->all()));
     //        $container->set('wooCommerceCustomer.shipping1',$key);

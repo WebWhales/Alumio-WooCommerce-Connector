@@ -49,7 +49,7 @@ class WooCommerceProductRestructureTransformer implements TransformerInterface
      * @param string $name
      */
     public function __construct(
-        string $name,
+        ?string $name,
         $regular_price,
         $description,
         $short_description,

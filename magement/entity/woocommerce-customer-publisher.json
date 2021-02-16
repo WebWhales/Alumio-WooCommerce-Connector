@@ -10,7 +10,7 @@
         "class": "WebWhales\\AlumioWooCommerceConnector\\DataContainerHttpClient\\EntityWoocommerceClient",
         "arguments": {
           "client": "%{client}",
-          "object_name": "customers",
+          "object_name": "/customers",
           "object_id": "%{customer_id}",
           "payload": "&{@}"
         },
