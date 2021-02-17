@@ -113,13 +113,13 @@ class EntityWoocommerceClient implements EntityClientInterface
     {
         $data = $entity->all();
 
-        $this->uri          = (string) $this->expander->__invoke($this->uri, $data);
+        $uri             = (string) $this->expander->__invoke($this->uri, $data);
         $extra_object_id = (string) $this->expander->__invoke($this->extra_object_id, $data);
 
         // ToDo: Add something to distinguish the difference between creating a sub object
         //  (where we should include the "extra_object_name") and updating the main object
         if ($extra_object_id) {
-            $this->uri .= "/{$this->extra_object_name}/{$extra_object_id}";
+            $uri .= "/{$this->extra_object_name}/{$extra_object_id}";
         }
 
         $payload = (array) $this->expander->__invoke($this->payload, $data);
@@ -130,7 +130,7 @@ class EntityWoocommerceClient implements EntityClientInterface
 
         if($this->method){
             $method  = (string) $this->expander->__invoke($this->method, $data);
-            $uri     = (string) $this->expander->__invoke($this->uri, $data);
+            $uri     = (string) $this->expander->__invoke($uri, $data);
             $payload = (array) $this->expander->__invoke($this->payload, $data);
 
             switch ($method) {
@@ -149,7 +149,7 @@ class EntityWoocommerceClient implements EntityClientInterface
             }
         }
         return $this->client->put(
-            $this->uri,
+            $uri,
             new DataContainer($payload),
             $header
         );
