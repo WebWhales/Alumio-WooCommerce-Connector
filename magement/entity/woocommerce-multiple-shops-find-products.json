@@ -1,0 +1,93 @@
+
+{
+  "$schema": "https://di.schema.mediact.com/register.prototype.json",
+  "type": "transformer",
+  "identifier": "woocommerce-multiple-shops-find-products",
+  "name": "Woocommerce Multiple Shops Find Products",
+  "object": {
+    "class": "Magement\\HttpConnector\\HttpTransformer",
+    "arguments": {
+      "client": {
+        "class": "WebWhales\\AlumioWooCommerceConnector\\DataContainerHttpClient\\EntityWoocommerceClient",
+        "arguments": {
+          "client": "%{client}",
+          "object_name": "products",
+          "url": "%{url}",
+          "method": "%{method}",
+          "payload": "%{payload}",
+          "header": "%{header}"
+        },
+        "meta": {
+          "payload": {
+            "default": "&{@}"
+          }
+        }
+      }
+    }
+  },
+  "schema": {
+    "ui": {
+      "ui:field": "callback",
+      "ui:options": {
+        "operationId": "redirectWooCommerceRestApiCustomerDocs",
+        "buttonText": "Example of the data structure",
+        "retriever": "NewWindow",
+        "toParameters": "@"
+      }
+    },
+    "properties": {
+      "url": {
+        "type": "string",
+        "title": "Url",
+        "ui": {
+          "ui:help": "Supports &{} placeholders"
+        }
+      },
+      "method": {
+        "type": "string",
+        "title": "Request Method",
+        "default": "get",
+        "ui": {
+          "ui:help": "Supports &{} placeholders"
+        }
+      },
+      "header": {
+        "type": "array",
+        "title": "Header",
+        "ui": {
+          "ui:help": "Supports &{} placeholders"
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "title": "key"
+            },
+            "value": {
+              "type": "string",
+              "title": "value"
+            }
+          }
+        }
+      },
+      "payload": {
+        "type": ["string", "object"],
+        "title": "Request Parameters",
+        "default": "&{@}",
+        "ui": {
+          "ui:help": "Supports &{} placeholders"
+        }
+      },
+      "client": {
+        "type": "string",
+        "title": "HTTP Client",
+        "default": "default",
+        "magement": {
+          "type": "http-client"
+        }
+      }
+
+    }
+  }
+}

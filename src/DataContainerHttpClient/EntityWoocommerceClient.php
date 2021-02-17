@@ -42,6 +42,8 @@ class EntityWoocommerceClient implements EntityClientInterface
 
     private $header;
 
+    private $method;
+
 
     /**
      * Constructor.
@@ -53,6 +55,7 @@ class EntityWoocommerceClient implements EntityClientInterface
      * @param string|null                    $object_name
      * @param string|null                    $url
      * @param string|null                    $extra_object_name
+     * @param string|null                    $method
      * @param array                    $header
      * @param VariableExpanderInterface|null $expander
      * @param UriFactoryInterface|null       $uriFactory
@@ -67,12 +70,17 @@ class EntityWoocommerceClient implements EntityClientInterface
         $extra_object_name = null,
         $url = null,
         $header= [],
+        $method = null,
         VariableExpanderInterface $expander = null,
         UriFactoryInterface $uriFactory = null
     ) {
 
         $this->extra_object_id = $extra_object_id;
         $this->uri="";
+        if($method){
+            $this->method     = $method;
+        }
+
         if($url){
             $this->uri                  .= "{$url}";
         }
@@ -119,10 +127,51 @@ class EntityWoocommerceClient implements EntityClientInterface
         foreach ($this->header as$value){
             $header[$value["key"]] = (string) $this->expander->__invoke($value["value"], $data);
         }
+
+        if($this->method){
+            $method  = (string) $this->expander->__invoke($this->method, $data);
+            $uri     = (string) $this->expander->__invoke($this->uri, $data);
+            $payload = (array) $this->expander->__invoke($this->payload, $data);
+
+            switch ($method) {
+                case 'get':
+                    return $this->client->get(
+                        $this->appendQuery($uri, $payload),$header
+                    );
+                case 'post':
+                case 'put':
+                case 'patch':
+                case 'delete':
+                    return $this->client->$method(
+                        $uri,
+                        new DataContainer($payload)
+                    );
+            }
+        }
         return $this->client->put(
             $this->uri,
             new DataContainer($payload),
             $header
         );
+    }
+
+    /**
+     * Append a query to an URI.
+     *
+     * @param string $uri
+     * @param array  ...$additional
+     *
+     * @return string
+     */
+    private function appendQuery(string $uri, array ...$additional): string
+    {
+        $uri = $this->uriFactory->createUri($uri);
+
+        parse_str($uri->getQuery(), $existingQuery);
+        return $uri->withQuery(
+            http_build_query(
+                array_merge($existingQuery, ...$additional)
+            )
+        )->__toString();
     }
 }
