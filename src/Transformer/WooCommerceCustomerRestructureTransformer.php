@@ -11,46 +11,71 @@ use Mediact\VariableExpander\VariableExpanderInterface;
 class WooCommerceCustomerRestructureTransformer implements TransformerInterface
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var \Mediact\VariableExpander\VariableExpander|\Mediact\VariableExpander\VariableExpanderInterface
      */
     private $expander;
 
+    /**
+     * @var string|null
+     */
     private $email;
 
+    /**
+     * @var string|null
+     */
     private $first_name;
 
+    /**
+     * @var string|null
+     */
     private $last_name;
 
+    /**
+     * @var string|null
+     */
     private $username;
 
+    /**
+     * @var string|null
+     */
     private $password;
 
+    /**
+     * @var array|null
+     */
     private $billing;
 
+    /**
+     * @var array|null
+     */
     private $shipping;
-
+    /**
+     * @var array|null
+     */
     private $meta_data;
 
     /**
-     * Constructor.
+     * WooCommerceCustomerRestructureTransformer constructor.
      *
-     * @param string $name
+     * @param string|null                                              $email
+     * @param string|null                                              $first_name
+     * @param string|null                                              $last_name
+     * @param string|null                                              $username
+     * @param string|null                                              $password
+     * @param array|null                                               $billing
+     * @param array|null                                               $shipping
+     * @param array|null                                               $meta_data
+     * @param \Mediact\VariableExpander\VariableExpanderInterface|null $expander
      */
     public function __construct(
         string $email = null,
-        $first_name = null,
-        $last_name = null,
-        $username = null,
-        $password = null,
-        $billing = null,
-        $shipping = null,
-        $meta_data = null,
-
+        string $first_name = null,
+        string $last_name = null,
+        string $username = null,
+        string $password = null,
+        array $billing = null,
+        array $shipping = null,
+        array $meta_data = null,
         VariableExpanderInterface $expander = null
     ) {
         $this->email      = $email;
@@ -64,18 +89,15 @@ class WooCommerceCustomerRestructureTransformer implements TransformerInterface
         $this->expander   = $expander ?? new VariableExpander();
     }
 
-    public function __invoke(DataContainerInterface $container): DataContainerInterface
+    /**
+     * @param \Mediact\DataContainer\DataContainerInterface $container
+     *
+     * @return \Mediact\DataContainer\DataContainerInterface
+     */
+    public function __invoke(DataContainerInterface $container): \Mediact\DataContainer\DataContainerInterface
     {
-      //  $value = $this->expander->__invoke($this->shipping, $container->all());
-      //  $container->set('wooCommerceCustomer.shipping33',$this->shipping);
-    //    foreach ($this->shipping[0] as $key => $value){
-    //        $container->set('wooCommerceCustomer.shipping',$this->expander->__invoke($value, $container->all()));
-    //        $container->set('wooCommerceCustomer.shipping1',$key);
-    //
-    //    }
-        //   return $container;
-
-        foreach ([
+        foreach (
+            [
             'email'      => 'wooCommerceCustomer.email',
             'first_name' => 'wooCommerceCustomer.first_name',
             'last_name'  => 'wooCommerceCustomer.last_name',
@@ -85,11 +107,10 @@ class WooCommerceCustomerRestructureTransformer implements TransformerInterface
             'shipping'   => 'wooCommerceCustomer.shipping',
             'meta_data'  => 'wooCommerceCustomer.meta_data',
 
-        ] as $alumioProp => $wooCommerceProp) {
-
+            ] as $alumioProp => $wooCommerceProp
+        ) {
             $value = $this->expander->__invoke($this->{$alumioProp}, $container->all());
             if ($value) {
-
                 $container->set($wooCommerceProp, $value);
             }
         }

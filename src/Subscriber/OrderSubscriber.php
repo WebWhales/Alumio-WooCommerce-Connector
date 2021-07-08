@@ -7,9 +7,9 @@
 
 namespace WebWhales\AlumioWooCommerceConnector\Subscriber;
 
-
 use Magement\Subscriber\SubscriberInterface;
 use Magement\Subscriber\SubscriberOutputInterface;
+
 class OrderSubscriber implements SubscriberInterface
 {
     /** @var string */

@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-
 namespace WebWhales\AlumioWooCommerceConnector\HttpClient;
 
-
-use Mediact\DataContainer\DataContainer;
+use Carbon\Carbon;
 use Mediact\DataContainer\DataContainerInterface;
 use Mediact\DataContainer\HttpClient\ClientInterface;
 use Mediact\DataContainer\HttpClient\InvalidMethodException;
@@ -39,8 +37,9 @@ class EntityOrderClient implements EntityClientInterface
     /**
      * Constructor.
      *
-     * @param ClientInterface                $client
      * @param int                            $days
+     * @param int                            $limit
+     * @param ClientInterface                $client
      * @param mixed                          $payload
      * @param VariableExpanderInterface|null $expander
      * @param UriFactoryInterface|null       $uriFactory
@@ -48,21 +47,19 @@ class EntityOrderClient implements EntityClientInterface
     public function __construct(
         int $days = 30,
         int $limit = null,
-
         ClientInterface $client,
         $payload = [],
         VariableExpanderInterface $expander = null,
         UriFactoryInterface $uriFactory = null
     ) {
-
-        $date = \Illuminate\Support\Carbon::now();
-        $after = $date->subDays($days)->format('Y-m-d\TH:i:s');
-        $parameters= "after=".$after;
-        if($limit){
-            $parameters .= "&per_page=".$limit;
+        $date       = Carbon::now();
+        $after      = $date->subDays($days)->format('Y-m-d\TH:i:s');
+        $parameters = "after=" . $after;
+        if ($limit) {
+            $parameters .= "&per_page=" . $limit;
         }
 
-        $this->uri        = "/orders?".$parameters;
+        $this->uri        = "/orders?" . $parameters;
         $this->client     = $client;
         $this->payload    = $payload;
         $this->expander   = $expander ?? new VariableExpander();
@@ -75,7 +72,6 @@ class EntityOrderClient implements EntityClientInterface
      * @param DataContainerInterface $entity
      *
      * @return ResponseInterface
-     * @throws InvalidMethodException When the method is not callable.
      */
     public function __invoke(DataContainerInterface $entity): ResponseInterface
     {
@@ -86,8 +82,6 @@ class EntityOrderClient implements EntityClientInterface
         return $this->client->get(
             $this->appendQuery($uri, $payload)
         );
-
-        throw new InvalidMethodException($method);
     }
 
     /**
@@ -110,6 +104,3 @@ class EntityOrderClient implements EntityClientInterface
         )->__toString();
     }
 }
-
-
-

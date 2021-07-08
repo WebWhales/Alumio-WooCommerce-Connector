@@ -50,8 +50,9 @@ class StorageAddTransformer implements TransformerInterface
     public function __invoke(
         DataContainerInterface $container
     ): DataContainerInterface {
-        $storageContainer = new DataContainer($this->storage->get('value') ?? []);
-        $key = array_key_last($storageContainer->all()) >= 0 ? array_key_last($storageContainer->all())+1:0;
+        $storageContainer        = new DataContainer($this->storage->get('value') ?? []);
+        $lastKeyStorageContainer = array_key_last($storageContainer->all());
+        $key                     = $lastKeyStorageContainer >= 0 ? $lastKeyStorageContainer + 1 : 0;
         $storageContainer->set(
             $key,
             $container->get($this->sourcePath)

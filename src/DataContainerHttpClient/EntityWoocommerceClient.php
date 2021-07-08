@@ -36,60 +36,62 @@ class EntityWoocommerceClient implements EntityClientInterface
     /** @var UriFactoryInterface */
     private $uriFactory;
 
+
+    /** @var string|null */
     private $extra_object_id;
 
+    /** @var string|null */
     private $extra_object_name;
 
+    /** @var array */
     private $header;
 
+    /** @var string|null */
     private $method;
 
 
     /**
      * Constructor.
      *
-     * @param ClientInterface                $client
-     * @param mixed                          $payload
-     * @param string|null                    $object_id
-     * @param string|null                    $extra_object_id
-     * @param string|null                    $object_name
-     * @param string|null                    $url
-     * @param string|null                    $extra_object_name
-     * @param string|null                    $method
+     * @param ClientInterface          $client
+     * @param mixed                    $payload
+     * @param string|null              $object_id
+     * @param array|null               $extra_object
+     * @param string|null              $object_name
+     * @param string|null              $url
      * @param array                    $header
-     * @param VariableExpanderInterface|null $expander
-     * @param UriFactoryInterface|null       $uriFactory
+     * @param string|null              $method
+     * @param UriFactoryInterface|null $uriFactory
      */
     public function __construct(
-
         ClientInterface $client,
         $payload = [],
-        $object_id = null,
-        $extra_object_id = null,
-        $object_name = null,
-        $extra_object_name = null,
-        $url = null,
-        $header= [],
-        $method = null,
-        VariableExpanderInterface $expander = null,
+        ?string $object_id = null,
+        ?array $extra_object = null,
+        ?string $object_name = null,
+        ?string $url = null,
+        array $header = [],
+        ?string $method = null,
         UriFactoryInterface $uriFactory = null
     ) {
 
-        $this->extra_object_id = $extra_object_id;
-        $this->uri="";
-        if($method){
-            $this->method     = $method;
+        $this->extra_object_id = $extra_object["extra_object_id"];
+        $this->uri             = "";
+        if ($method) {
+            $this->method = $method;
         }
 
-        if($url){
-            $this->uri                  .= "{$url}";
+        if ($url) {
+            $this->uri .= "{$url}";
         }
-        $this->uri                  .= "/{$object_name}";
 
-        if($object_id){
-            $this->uri                  .= "/{$object_id}";
+        $this->uri .= "/{$object_name}";
+
+        if ($object_id) {
+            $this->uri .= "/{$object_id}";
         }
-        $this->extra_object_name = $extra_object_name;
+
+        $this->extra_object_name = $extra_object["extra_object_name"];
 
         $this->client  = $client;
         $this->payload = $payload;
@@ -123,12 +125,12 @@ class EntityWoocommerceClient implements EntityClientInterface
         }
 
         $payload = (array) $this->expander->__invoke($this->payload, $data);
-        $header=[];
-        foreach ($this->header as$value){
+        $header  = [];
+        foreach ($this->header as $value) {
             $header[$value["key"]] = (string) $this->expander->__invoke($value["value"], $data);
         }
 
-        if($this->method){
+        if ($this->method) {
             $method  = (string) $this->expander->__invoke($this->method, $data);
             $uri     = (string) $this->expander->__invoke($uri, $data);
             $payload = (array) $this->expander->__invoke($this->payload, $data);
@@ -136,7 +138,8 @@ class EntityWoocommerceClient implements EntityClientInterface
             switch ($method) {
                 case 'get':
                     return $this->client->get(
-                        $this->appendQuery($uri, $payload),$header
+                        $this->appendQuery($uri, $payload),
+                        $header
                     );
                 case 'post':
                 case 'put':
@@ -148,6 +151,7 @@ class EntityWoocommerceClient implements EntityClientInterface
                     );
             }
         }
+
         return $this->client->put(
             $uri,
             new DataContainer($payload),

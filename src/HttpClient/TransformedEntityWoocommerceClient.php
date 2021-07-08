@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
+namespace WebWhales\AlumioWooCommerceConnector\HttpClient;
 
 use Magement\Entity\Entity;
 use Magement\Entity\EntityIterator;
 use Magement\Entity\Transformer\ListTransformerInterface;
+use Magement\HttpClient\TransformedEntityClient;
 use Mediact\DataContainer\DataContainer;
 use Mediact\DataContainer\DataContainerInterface;
 use Mediact\DataContainer\HttpClient\EntityClientInterface;
 use Mediact\DataContainer\HttpClient\Response;
 use Mediact\DataContainer\HttpClient\ResponseInterface;
 
-class TransformedEntityWoocommerceClient extends \Magement\HttpClient\TransformedEntityClient
+class TransformedEntityWoocommerceClient extends TransformedEntityClient
 {
     /** @var EntityClientInterface */
     private $client;

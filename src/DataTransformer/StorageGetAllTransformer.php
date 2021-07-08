@@ -42,7 +42,6 @@ class StorageGetAllTransformer implements TransformerInterface
      *
      * @return DataContainerInterface
      */
-
     public function __invoke(
         DataContainerInterface $container
     ): DataContainerInterface {

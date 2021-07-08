@@ -12,8 +12,10 @@
           "client": "%{client}",
           "object_name": "products",
           "object_id": "%{product_id}",
-          "extra_object_name": "variations",
-          "extra_object_id": "%{variation_id}",
+          "extra_object":{
+            "name": "variations",
+            "id": "%{variation_id}"
+          },
           "payload": "%{payload}"
         },
         "meta": {

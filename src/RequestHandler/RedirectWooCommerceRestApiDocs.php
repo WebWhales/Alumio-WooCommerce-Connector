@@ -25,25 +25,31 @@ class RedirectWooCommerceRestApiDocs implements RequestHandlerInterface
     /** @var RedirectFactoryInterface */
     private $redirectFactory;
 
+    /**
+     * @var string
+     */
     private $serverParam;
 
+    /**
+     * @var string[]
+     */
     private static $docsUrls = [
         'products' => 'https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-product',
         'customers' => 'https://woocommerce.github.io/woocommerce-rest-api-docs/#customer-properties',
     ];
 
     /**
-     * Constructor.
+     * RedirectWooCommerceRestApiDocs constructor.
      *
-     * @param RedirectFactoryInterface    $redirectFactory
+     * @param \Alumio\Http\Message\Response\RedirectFactoryInterface $redirectFactory
+     * @param string                                                 $serverParam
      */
     public function __construct(
         RedirectFactoryInterface $redirectFactory,
-        $serverParam
+        string $serverParam
     ) {
-        $this->redirectFactory  = $redirectFactory;
-        $this->serverParam  = $serverParam;
-
+        $this->redirectFactory = $redirectFactory;
+        $this->serverParam     = $serverParam;
     }
 
     /**

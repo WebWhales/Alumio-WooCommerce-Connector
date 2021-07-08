@@ -7,20 +7,27 @@ use Mediact\DataContainer\Transformer\TransformerInterface;
 
 class WooCommerceChooseProductRestructureTransformer implements TransformerInterface
 {
-
+    /**
+     * @var string
+     */
     private $parent_id;
+
+    /**
+     * @var string
+     */
     private $product_id;
 
     /**
-     * Constructor.
+     * WooCommerceChooseProductRestructureTransformer constructor.
      *
-     * @param string $name
+     * @param string $parent_id
+     * @param string $product_id
      */
     public function __construct(
         string $parent_id,
-        $product_id
+        string $product_id
     ) {
-        $this->parent_id     = $parent_id;
+        $this->parent_id  = $parent_id;
         $this->product_id = $product_id;
     }
     /**
@@ -33,7 +40,7 @@ class WooCommerceChooseProductRestructureTransformer implements TransformerInter
     public function __invoke(
         DataContainerInterface $container
     ): DataContainerInterface {
-        $product_id = $this->parent_id != 0 ? $this->parent_id : $this->product_id ;
+        $product_id   = $this->parent_id != 0 ? $this->parent_id : $this->product_id ;
         $variation_id = $this->parent_id != 0 ? $this->product_id :  $this->parent_id;
 
         $container->copy($product_id, 'product_id');

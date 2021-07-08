@@ -9,12 +9,21 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
+        "magement/file-queue-subscriber": "^1.1",
+        "magement/http-client": "^4.0@RC",
+        "magement/http-connector": "^2.1",
         "magement/publisher-api": "^1.0",
-        "magement/subscriber-api": "^1.0"
+        "magement/storage-connector": "^1.2",
+        "magement/subscriber-api": "^1.0",
+        "mediact/http-server-handler-manager": "^1.0",
+        "nesbot/carbon": "^2.50"
     },
-    "require-dev": {
-        "magement/sdk": "@stable"
-    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://composer.mediact.nl"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "WebWhales\\AlumioWooCommerceConnector\\": "./src"
@@ -22,5 +31,23 @@
     },
     "support": {
         "issues": "https://github.com/WebWhales/Alumio-WooCommerce-Connector/issues"
+    },
+    "require-dev": {
+        "mediact/testing-suite": "^2.9"
+    },
+    "archive": {
+        "exclude": [
+            "/.gitignore",
+            "/grumphp.yml",
+            "/pdepend.xml",
+            "/phpstan.neon",
+            "/phpunit.xml",
+            "/phpcs.xml",
+            "/phpmd.xml",
+            "/tests"
+        ]
+    },
+    "config": {
+        "sort-packages": true
     }
 }
