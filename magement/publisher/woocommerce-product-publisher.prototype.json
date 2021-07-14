@@ -16,13 +16,7 @@
   },
   "schema": {
     "ui": {
-      "ui:field": "callback",
-      "ui:options": {
-        "operationId": "redirectWooCommerceRestApiDocs",
-        "buttonText": "Example of the data structure",
-        "retriever": "NewWindow",
-        "toParameters": "@"
-      }
+      "ui:help": "[Example of the data structure](https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-product)" 
     },
     "properties": {
       "client": {
